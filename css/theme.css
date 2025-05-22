@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --main_color: #8161c3;         
+    --main_color_seg: #9E87D6;     
+
+    --background: #e1e1f5;         
+    --contrast_back: #FFFFFF;      
+
+    --black: #2E2B3F;              
+    --black_l: #504C60;            
+    --black_ll: #807B93;           
+
+    --transp: #B9A6E188;           
+
+    --alert: #db4f60;              
+    --success: #46e68a;            
+}
+
+
+
+
+
+::selection {
+    background-color: var(--main_color);
+    color: var(--contrast_back);
+}
+
+* {
+    scrollbar-width: thin;
+    /* Firefox */
+    scrollbar-color: var(--main_color) var(--contrast_back);
+    /* Firefox */
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: var(--main_color) !important;
+}
+
+*::-webkit-scrollbar-track {
+    background-color: var(--contrast_back) !important;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background-color: var(--transp) !important;
+}
+
+*::-webkit-scrollbar-button {
+    display: none !important;
+    height: 0 !important;
+    width: 0 !important;
+}
+
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Noto Sans", sans-serif;
+    font-optical-sizing: auto;
+}
+
+#logo{
+    width: 9rem;
+}

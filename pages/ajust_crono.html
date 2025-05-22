@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/Sortable.min.js"></script>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="../css/theme.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Cronograma</title>
+</head>
+<style>
+    h2 {
+        font-size: 1.7rem;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    li {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    li.box {
+        padding: 1rem;
+        margin-bottom: 0;
+        transition: 0.3s ease;
+    }
+
+    li.box:hover {
+        cursor: grab;
+    }
+
+    li.box:active {
+        box-shadow: 2px 2px 10px rgb(163, 163, 163);
+        transform: translateY(-5px);
+        cursor: grabbing;
+    }
+
+
+    input:disabled {
+        border: none;
+        padding: 0;
+        color: var(--main_color);
+        font-weight: bold;
+        font-size: 1.2rem;
+    }
+
+    #cronograma_field {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    #cronograma_header_fields {
+        margin-bottom: 2rem;
+
+        h2 {
+            margin: 0 0 1rem;
+        }
+
+        h3 {
+            margin: 0;
+            font-weight: normal;
+        }
+    }
+
+    #cronograma_header_fields_data {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        #header_fields1 {
+            display: flex;
+            gap: 1rem;
+        }
+    }
+
+    .list_cont {
+        display: flex;
+        gap: 1rem;
+        width: 100%;
+        justify-content: space-between;
+
+        .task-header {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            flex: 4;
+
+            .task-header-dth {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+                margin-bottom: 0.5rem;
+
+                .task_name_cr {
+                    font-size: 1.3rem;
+                    font-weight: bold;
+                }
+            }
+
+            .task_dayst input {
+                width: 4rem;
+            }
+        }
+
+        .task_dates {
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            justify-content: space-between;
+
+            .task_date {
+                display: flex;
+                flex-direction: column;
+            }
+        }
+    }
+
+    .dragbleIcon {
+        cursor: grab;
+        transition: color 0.2s;
+        font-size: 2rem;
+    }
+
+    .dragbleIcon:hover {
+        color: var(--main_color);
+    }
+
+    .dragbleIcon:active {
+        cursor: grabbing !important;
+    }
+</style>
+
+<body>
+    <div class="conteudo_form">
+        <h1>Cronograma</h1>
+
+        <div class="box">
+            <div class="filter">
+                <button class="button btn_default" onclick="document.getElementById('filter_fields').showModal()">
+                    <span class="material-symbols-outlined">filter_alt</span>
+                    Filtro
+                </button>
+                <button class="button btn_default" onclick="document.getElementById('alert_modal').showModal()">
+                    <span class="material-symbols-outlined">save</span>
+                    Salvar
+                </button>
+            </div>
+
+            <span id="error_get" class="">Nenhum proejto selecionado!</span>
+            <div id="cronograma_field" class="inactive">
+                <div id="cronograma_header_fields">
+                    <h2 id="projeto_nome"></h2>
+                    <h3 id="projeto_descricao"></h3>
+                </div>
+                <div id="cronograma_header_fields_data">
+                    <div id="header_fields1">
+                        <label>Data inicial do projeto:
+                            <input type="date" id="startDate" name="startDate" value="" />
+                        </label>
+                        <button class="button btn_default" onclick="recalcularDatas()">
+                            <span class="material-symbols-outlined">refresh</span>
+                        </button>
+                    </div>
+                    <div id="header_fields2">
+                        <label>Data final do projeto:</label>
+                        <input type="date" id="dataFimProjetoValor" value="" disabled>
+                    </div>
+                </div>
+                <div id="cronograma_result">
+                    <ul id="taskList"></ul>
+                </div>
+            </div>
+
+            <dialog id="filter_fields">
+                <div class="filter_ajust header_field">
+                    <h2>Filtro</h2>
+                    <button class="button btn_ok" onclick="closeModal('filter_fields')"><span
+                            class="material-symbols-outlined">close</span></button>
+                </div>
+                <div class="input_field">
+                    <select id="id_projeto" class="input select_filtro" name="id_projeto"></select>
+                </div>
+                <div class="filter_ajust button_field center">
+                    <button class="button btn_default"
+                        onclick="applyFilterCronograma('filter_fields', document.getElementById('id_projeto').value)"><span
+                            class="material-symbols-outlined">filter_alt</span>Aplicar</button>
+                </div>
+            </dialog>
+
+            <dialog id="success_modal" class="modal_message success">
+                <span class="material-symbols-outlined">check_circle</span>
+                <div class="header_field">
+                    <h2>Dados salvos com sucesso!</h2>
+                </div>
+                <div class="button_field">
+                    <button class="button btn_ok"
+                        onclick="document.getElementById('success_modal').close()">Fechar</button>
+                </div>
+            </dialog>
+
+            <dialog id="error_modal" class="modal_message error">
+                <span class="material-symbols-outlined">cancel</span>
+                <div class="header_field">
+                    <h2>Erro ao tentar salvar os dados!</h2>
+                    <p id="mensagem_erro">Contate o administrador do sistema.</p>
+                </div>
+                <div class="button_field">
+                    <button class="button btn_ok"
+                        onclick="document.getElementById('error_modal').close()">Fechar</button>
+                </div>
+            </dialog>
+
+            <dialog id="alert_modal" class="modal_message alert">
+                <div class="header_field">
+                    <h2>Tem certeza que deseja salvar esses dados?</h2>
+                </div>
+                <div class="filter_ajust button_field">
+                    <button class="button btn_default" onclick="saveCronograma()"><span
+                            class="material-symbols-outlined">save</span>Salvar</button>
+                    <button class="button btn_ok"
+                        onclick="document.getElementById('alert_modal').close()">Cancelar</button>
+                </div>
+            </dialog>
+        </div>
+    </div>
+</body>
+<script src="../js/script.js"></script>
+<script>
+    getProjetosList();
+</script>
+
+</html>

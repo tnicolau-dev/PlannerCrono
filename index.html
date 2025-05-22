@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cronograma</title>
+    <link rel="stylesheet" href="./css/theme.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: var(--black);
+            color: white;
+            height: 100vh;
+            padding-top: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            transition: transform 0.3s ease;
+            z-index: 1000;
+
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .sidebar span {
+            padding: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .sidebar.hidden {
+            transform: translateX(-100%);
+        }
+
+        .menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+            background-color: var(--main_color);
+        }
+
+        .menu-item {
+            cursor: pointer;
+            padding: 1rem;
+            transition: background 0.3s;
+            position: relative;
+            background: var(--black);
+        }
+
+        .menu-item:hover {
+            background-color: #34495e;
+        }
+
+        .menu-item.itens::after {
+            content: "▼";
+            position: absolute;
+            right: 20px;
+            transition: transform 0.3s;
+        }
+
+        .menu-item.itens.open::after {
+            transform: rotate(180deg);
+        }
+
+        .submenu {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+            background: var(--main_color);
+        }
+
+        .submenu li {
+            padding: 10px 40px;
+            cursor: pointer;
+            background-color: var(--black_l);
+        }
+
+        .submenu li:hover {
+            background-color: var(--black_ll);
+        }
+
+        .menu-item.open+.submenu {
+            max-height: 500px;
+        }
+
+        .content {
+            flex: 1;
+            margin-left: 250px;
+            padding: 20px;
+            transition: margin-left 0.3s;
+        }
+
+        .toggle-button {
+            display: none;
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 1100;
+            background-color: var(--black);
+            border: none;
+            color: white;
+            font-size: 24px;
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+
+        .content {
+            flex: 1;
+            margin-left: 250px;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .content iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+
+        @media (max-width: 900px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .content {
+                margin-left: 0;
+            }
+
+            .toggle-button {
+                display: block;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <button class="toggle-button" id="menuToggle">☰</button>
+    <nav class="sidebar" id="sidebar">
+        <span>Cronograma</span>
+        <ul class="menu">
+            <li class="menu-item itens">Cadastro</li>
+            <ul class="submenu">
+                <li>Projeto</li>
+                <li>Tarefas</li>
+                <li>Subtarefas</li>
+            </ul>
+            <li class="menu-item" onclick="document.getElementById('conteudoFrame').src = 'pages/ajust_crono.html'">Ajustar cronograma</li>
+            <li class="menu-item" onclick="document.getElementById('conteudoFrame').src = 'pages/atividades.html'">Executar atividade</li>
+            <li class="menu-item">Sair</li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        <iframe id="conteudoFrame" src="" frameborder="0" style="width:100%; height:100%;"></iframe>
+    </div>
+
+    <script>
+        const menuItems = document.querySelectorAll('.menu-item');
+        const sidebar = document.getElementById('sidebar');
+        const menuToggle = document.getElementById('menuToggle');
+
+        menuItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const submenu = item.nextElementSibling;
+                const isOpen = item.classList.contains('open');
+
+                // Fecha todos os submenus
+                menuItems.forEach(i => {
+                    i.classList.remove('open');
+                    const next = i.nextElementSibling;
+                    if (next && next.classList.contains('submenu')) {
+                        next.style.maxHeight = null;
+                    }
+                });
+
+                // Abre submenu clicado
+                if (!isOpen && submenu && submenu.classList.contains('submenu')) {
+                    item.classList.add('open');
+                    submenu.style.maxHeight = submenu.scrollHeight + "px";
+                }
+            });
+        });
+
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('hidden');
+            sidebar.classList.toggle('active');
+        });
+
+        const submenuItems = document.querySelectorAll('.submenu li');
+        const iframe = document.getElementById('conteudoFrame');
+
+        submenuItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const texto = item.innerText;
+
+                let pagina = '';
+
+                switch (texto) {
+                    case 'Projeto':
+                        pagina = 'pages/cadastro/cad_projeto.html';
+                        break;
+                    case 'Tarefas':
+                        pagina = 'pages/cadastro/cad_tarefa.html';
+                        break;
+                    case 'Subtarefas':
+                        pagina = 'pages/cadastro/cad_subtarefa.html';
+                        break;
+                    default:
+                        pagina = '';
+                }
+
+                if (pagina) {
+                    iframe.src = pagina;
+                }
+
+                // Fecha o menu no mobile
+                if (window.innerWidth < 768) {
+                    sidebar.classList.add('hidden');
+                    sidebar.classList.remove('active');
+                }
+            });
+        });
+
+    </script>
+</body>
+
+</html>
