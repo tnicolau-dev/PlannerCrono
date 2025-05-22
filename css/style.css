@@ -2,6 +2,11 @@ body {
     margin: 0;
     background-color: var(--background);
     color: var(--black);
+    height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .inactive {
@@ -228,6 +233,7 @@ dialog {
         display: flex;
         justify-content: space-between;
     }
+
     .filter_ajust.center {
         justify-content: center;
     }
@@ -259,24 +265,26 @@ dialog {
         text-align: -webkit-center;
     }
 
-    > .material-symbols-outlined {
+    >.material-symbols-outlined {
         font-size: 3rem;
         margin-bottom: 1rem;
     }
 }
-.modal_message.success{
+
+.modal_message.success {
     .material-symbols-outlined {
         color: var(--success);
     }
 }
-.modal_message.error{
+
+.modal_message.error {
     .material-symbols-outlined {
         color: var(--alert);
     }
 }
 
 
-@media (max-width: 800px) {
+@media (max-width: 900px) {
 
     .conteudo_form {
         margin: 1rem 1.5rem;

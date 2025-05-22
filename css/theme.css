@@ -1,25 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root {
-    --main_color: #8161c3;         
-    --main_color_seg: #9E87D6;     
+    --main_color: #8161c3;
+    --main_color_seg: #9E87D6;
 
-    --background: #e1e1f5;         
-    --contrast_back: #FFFFFF;      
+    --background: #e1e1f5;
+    --contrast_back: #FFFFFF;
 
-    --black: #2E2B3F;              
-    --black_l: #504C60;            
-    --black_ll: #807B93;           
+    --black: #2E2B3F;
+    --black_l: #504C60;
+    --black_ll: #807B93;
 
-    --transp: #B9A6E188;           
+    --transp: #B9A6E188;
 
-    --alert: #db4f60;              
-    --success: #46e68a;            
+    --alert: #db4f60;
+    --success: #46e68a;
 }
-
-
-
-
 
 ::selection {
     background-color: var(--main_color);
@@ -61,6 +57,56 @@ body {
     font-optical-sizing: auto;
 }
 
-#logo{
+#logo {
     width: 9rem;
+}
+
+#icone_logo {
+    display: none;
+    width: 3rem;
+}
+
+footer {
+    width: 100%;
+    margin-top: 2rem;
+    text-align: center;
+    background: var(--main_color);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+
+    p {
+        font-size: 0.7rem;
+    }
+
+    #social {
+        margin: 1rem 0 0;
+        display: flex;
+        gap: 1rem;
+
+        a svg {
+            width: 2rem;
+        }
+
+        a svg path {
+            transition: fill 0.2s ease;
+        }
+
+        a:hover svg path {
+            fill: var(--black);
+        }
+    }
+}
+
+@media (max-width: 900px) {
+    #logo {
+        display: none;
+    }
+
+    #icone_logo {
+        display: block;
+    }
 }
