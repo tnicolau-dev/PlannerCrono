@@ -138,7 +138,7 @@
       nav {
         flex-direction: column;
         background-color: var(--main_color);
-        width: 80%;
+        width: 60%;
         height: 100vh;
         position: absolute;
         top: 0;
@@ -200,7 +200,7 @@
         padding: 0;
         transition: max-height 0.3s ease;
 
-        li{
+        li {
           padding: 0.7rem;
         }
       }
@@ -321,7 +321,7 @@
           </li>
         </ul>
         <button class="menu-toggle close_mobile" onclick="toggleMenu()">
-          <span class="material-symbols-outlined">
+          <span class="material-symbols-outlined" style="font-size: 2.5rem;">
             cancel
           </span>
         </button>
@@ -329,24 +329,46 @@
     </div>
 
     <div class="actions">
-      <button onclick="alert('Você tem 3 notificações')"><span class="material-symbols-outlined">
+      <button onclick="document.getElementById('notifications').showModal();">
+        <span class="material-symbols-outlined">
           notifications
-        </span></button>
-      <div>
-        <button onclick="toggleSubmenu(this)"><span class="material-symbols-outlined">
-            account_circle
-          </span></button>
-        <ul style="display: none; position: absolute; background: #444; right: 10px; top: 60px;">
-          <li><a href="#">Perfil</a></li>
-          <li><a href="#">Sair</a></li>
-        </ul>
-      </div>
+        </span>
+      </button>
+      <button>
+        <span class="material-symbols-outlined">
+          logout
+        </span>
+      </button>
     </div>
   </header>
 
   <div class="content">
     <iframe id="conteudoFrame" src="" frameborder="0" style="width:100%; height:100%;"></iframe>
   </div>
+
+  <dialog id="notifications">
+    <div id="content_not">
+      <div id="header_not">
+        <h1>Notificações</h1>
+        <button class="button btn_ok button_close_modal" onclick="document.getElementById('notifications').close();">
+          <span class="material-symbols-outlined">
+            close
+          </span>
+        </button>
+      </div>
+      <div id="list_not">
+        <div id="error_not">
+          <span class="material-symbols-outlined">
+            cancel
+          </span>
+          <p>Não há novas notificações</p>
+        </div>
+      </div>
+      <div id="footer_not">
+        <button class="button btn_default">Ver todas</button>
+      </div>
+    </div>
+  </dialog>
 
   <script>
     function toggleMenu() {
@@ -370,14 +392,6 @@
       item.addEventListener('click', function () {
         toggleMenu();
       });
-    });
-
-
-    // Botão de usuário
-    document.querySelector('.actions div button').addEventListener('click', function (e) {
-      e.stopPropagation();
-      const submenu = this.nextElementSibling;
-      submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
     });
 
     window.addEventListener('click', () => {
