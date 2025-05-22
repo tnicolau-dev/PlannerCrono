@@ -102,8 +102,8 @@ footer {
 }
 
 dialog#notifications {
-    width: 80% !important;
-    height: 90% !important;
+    width: 80%;
+    height: 90%;
     max-width: unset;
 
     div#content_not {
@@ -140,7 +140,7 @@ dialog#notifications {
                 color: var(--black_ll);
                 text-align: center;
 
-                span{
+                span {
                     font-size: 4rem;
                 }
             }
@@ -167,5 +167,11 @@ dialog#notifications {
 
     #icone_logo {
         display: block;
+    }
+
+    dialog#notifications {
+        width: 100% ;
+        margin: auto auto 0;
+        border-radius: unset;
     }
 }
