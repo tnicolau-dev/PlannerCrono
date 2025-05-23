@@ -136,7 +136,6 @@ table {
     background-color: var(--background);
     border-radius: 0.25rem;
     overflow: hidden;
-    height: 20px;
 }
 
 .progress-bar_task {
