@@ -145,7 +145,7 @@ table {
     text-align: center;
     color: white;
     white-space: nowrap;
-    padding: 0 5px;
+    padding: 0.3rem;
 }
 
 .progress-bar_task.concluido {
