@@ -59,11 +59,13 @@ body {
 
 #logo {
     width: 9rem;
+    cursor: pointer;
 }
 
 #icone_logo {
     display: none;
     width: 3rem;
+    cursor: pointer;
 }
 
 footer {

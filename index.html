@@ -124,6 +124,69 @@
       display: none;
     }
 
+    #home {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      width: 100vw;
+      z-index: -1;
+      gap: 1rem;
+
+      #calendar {
+        position: relative;
+
+        svg {
+          width: 15rem;
+        }
+
+        #day {
+          position: absolute;
+          top: 67%;
+          left: 50%;
+          transform: translate(-50%, -67%);
+          font-size: 6rem;
+          font-weight: bold;
+        }
+
+        #month {
+          position: absolute;
+          left: 50%;
+          top: 17%;
+          transform: translate(-50%, -17%);
+          font-size: 1.4rem;
+          color: white;
+          font-weight: bold;
+        }
+      }
+
+      div#date_info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3rem;
+        font-size: 3rem;
+
+        #date_data {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 0.7rem;
+
+          span:nth-child(1) {
+            font-size: 1.3rem;
+            color: var(--black_l);
+          }
+
+          span:nth-child(2) {
+            font-size: 1rem;
+            color: var(--black_ll);
+          }
+        }
+      }
+    }
+
     /* Responsividade */
     @media (max-width: 900px) {
       #header_menu {
@@ -215,7 +278,8 @@
 <body>
   <header>
     <div id="header_menu">
-      <svg id="logo" viewBox="0 0 199 67" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg onclick="window.location.reload()" id="logo" viewBox="0 0 199 67" fill="none"
+        xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" clip-rule="evenodd"
           d="M49.6529 0C50.954 3.07401e-05 52.0088 1.04312 52.0088 2.32983V6.06121H57.0649C62.0092 6.06136 66.0176 10.0251 66.0176 14.9146V58.1466C66.0174 63.036 62.0091 66.9998 57.0649 67H8.97022C4.02593 67 0.0177646 63.0361 0.0175781 58.1466V14.9146C0.0175798 10.025 4.02581 6.06121 8.97022 6.06121H14.0263V2.32983C14.0263 1.0431 15.0811 0 16.3823 0C17.6833 0.00015369 18.7383 1.0432 18.7383 2.32983V6.06121H47.2969V2.32983C47.2969 1.0431 48.3517 0 49.6529 0ZM14.1929 47.3539C11.7753 47.354 9.81506 49.2923 9.81506 51.6832C9.81527 54.0738 11.7754 56.0123 14.1929 56.0125C16.6105 56.0125 18.5705 54.0739 18.5708 51.6832C18.5708 49.2922 16.6107 47.3539 14.1929 47.3539ZM32.5795 47.3539C30.1618 47.3539 28.2017 49.2923 28.2017 51.6832C28.2019 54.0739 30.162 56.0124 32.5795 56.0125C34.9971 56.0125 36.9572 54.0739 36.9574 51.6832C36.9574 49.2922 34.9973 47.3539 32.5795 47.3539ZM50.9661 47.3539C48.5484 47.3539 46.5883 49.2922 46.5883 51.6832C46.5885 54.0739 48.5485 56.0125 50.9661 56.0125C53.3838 56.0125 55.3438 54.0739 55.344 51.6832C55.344 49.2922 53.3839 47.3539 50.9661 47.3539ZM14.1929 30.9031C11.7753 30.9032 9.81506 32.8415 9.81506 35.2324C9.8154 37.6229 11.7755 39.5606 14.1929 39.5608C16.6105 39.5608 18.5704 37.623 18.5708 35.2324C18.5708 32.8414 16.6107 30.9031 14.1929 30.9031ZM32.5795 30.9031C30.1618 30.9031 28.2017 32.8415 28.2017 35.2324C28.202 37.623 30.162 39.5607 32.5795 39.5608C34.9971 39.5608 36.957 37.623 36.9574 35.2324C36.9574 32.8414 34.9973 30.9031 32.5795 30.9031ZM50.9661 30.9031C48.5484 30.9031 46.5883 32.8414 46.5883 35.2324C46.5886 37.623 48.5486 39.5607 50.9661 39.5608C53.3837 39.5608 55.3437 37.623 55.344 35.2324C55.344 32.8414 53.3839 30.9031 50.9661 30.9031ZM8.97022 10.7209C6.62814 10.7209 4.7295 12.5985 4.7295 14.9146V23.5431H61.3057V14.9146C61.3057 12.5986 59.4069 10.721 57.0649 10.7209H52.0088V13.5858C52.0088 14.8725 50.954 15.9156 49.6529 15.9157C48.3517 15.9157 47.297 14.8725 47.2969 13.5858V10.7209H18.7383V13.5858C18.7382 14.8724 17.6833 15.9155 16.3823 15.9157C15.0812 15.9157 14.0264 14.8725 14.0263 13.5858V10.7209H8.97022Z"
           fill="white" />
@@ -255,7 +319,8 @@
           fill="white" />
       </svg>
 
-      <svg id="icone_logo" viewBox="0 0 52 53" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg onclick="window.location.reload()" id="icone_logo" viewBox="0 0 52 53" fill="none"
+        xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" clip-rule="evenodd"
           d="M39.1066 0C40.1317 2.43168e-05 40.9628 0.825155 40.9628 1.843V4.79469H44.9464C48.8419 4.79481 52 7.93029 52 11.7981V45.9966C51.9999 49.8643 48.8418 52.9999 44.9464 53H7.0536C3.1581 53 0.000146953 49.8643 0 45.9966V11.7981C1.33942e-06 7.93022 3.158 4.79469 7.0536 4.79469H11.0372V1.843C11.0372 0.82514 11.8683 0 12.8934 0C13.9185 0.000121575 14.7496 0.825215 14.7496 1.843V4.79469H37.2504V1.843C37.2504 0.82514 38.0814 0 39.1066 0ZM11.1684 37.459C9.26365 37.4591 7.71923 38.9924 7.71923 40.8837C7.7194 42.7748 9.26375 44.3082 11.1684 44.3084C13.0732 44.3084 14.6175 42.7749 14.6177 40.8837C14.6177 38.9924 13.0733 37.459 11.1684 37.459ZM25.6549 37.459C23.75 37.4591 22.2056 38.9924 22.2056 40.8837C22.2058 42.7749 23.7501 44.3083 25.6549 44.3084C27.5597 44.3084 29.1039 42.7749 29.1041 40.8837C29.1041 38.9924 27.5598 37.459 25.6549 37.459ZM40.1413 37.459C38.2364 37.459 36.6921 38.9924 36.6921 40.8837C36.6922 42.7749 38.2365 44.3084 40.1413 44.3084C42.0461 44.3084 43.5903 42.7749 43.5905 40.8837C43.5905 38.9924 42.0462 37.459 40.1413 37.459ZM11.1684 24.4457C9.26365 24.4458 7.71923 25.9791 7.71923 27.8704C7.7195 29.7614 9.26381 31.2942 11.1684 31.2943C13.0732 31.2943 14.6174 29.7615 14.6177 27.8704C14.6177 25.979 13.0733 24.4457 11.1684 24.4457ZM25.6549 24.4457C23.75 24.4458 22.2056 25.9791 22.2056 27.8704C22.2059 29.7615 23.7502 31.2943 25.6549 31.2943C27.5596 31.2943 29.1038 29.7615 29.1041 27.8704C29.1041 25.979 27.5598 24.4457 25.6549 24.4457ZM40.1413 24.4457C38.2364 24.4457 36.6921 25.979 36.6921 27.8704C36.6923 29.7615 38.2365 31.2943 40.1413 31.2943C42.046 31.2943 43.5902 29.7615 43.5905 27.8704C43.5905 25.979 42.0462 24.4457 40.1413 24.4457ZM7.0536 8.48069C5.20832 8.48069 3.71242 9.96594 3.71242 11.7981V18.6237H48.2876V11.7981C48.2876 9.96602 46.7916 8.48081 44.9464 8.48069H40.9628V10.747C40.9628 11.7648 40.1317 12.59 39.1066 12.59C38.0815 12.59 37.2504 11.7648 37.2504 10.747V8.48069H14.7496V10.747C14.7496 11.7648 13.9184 12.5899 12.8934 12.59C11.8683 12.59 11.0372 11.7648 11.0372 10.747V8.48069H7.0536Z"
           fill="white" />
@@ -311,7 +376,7 @@
               Cronograma
             </span>
           </li>
-          <li class="menu-item" onclick="document.getElementById('conteudoFrame').src = 'pages/atividades.html'">
+          <li class="menu-item" onclick="document.getElementById('conteudoFrame').src = 'pages/atividades.html';">
             <span class="material-symbols-outlined">
               pending_actions
             </span>
@@ -344,6 +409,35 @@
 
   <div class="content">
     <iframe id="conteudoFrame" src="" frameborder="0" style="width:100%; height:100%;"></iframe>
+  </div>
+
+  <div id="home">
+    <div id="calendar">
+      <svg viewBox="0 0 281 287" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M11.1061 87.4369H269.781V269.311C269.781 273.177 266.647 276.311 262.781 276.311H18.1061C14.2401 276.311 11.1061 273.177 11.1061 269.311V87.4369Z"
+          fill="var(--contrast_back)" />
+        <path
+          d="M7.00024 41.0596C7.00024 37.1936 10.1343 34.0596 14.0002 34.0596H266.887C270.753 34.0596 273.887 37.1936 273.887 41.0596V87.4369H7.00024V41.0596Z"
+          fill="var(--main_color_seg)" />
+        <path
+          d="M52.166 38.5208H22C17.3058 38.5209 13.5002 42.3265 13.5 47.0208V264.979C13.5 269.673 17.3057 273.479 22 273.479H259.032C263.727 273.479 267.532 269.673 267.532 264.979V47.0208C267.532 42.3265 263.727 38.5208 259.032 38.5208H228.722V25.5208H259.032C270.906 25.5208 280.532 35.1468 280.532 47.0208V264.979C280.532 276.853 270.906 286.479 259.032 286.479H22C10.126 286.479 0.5 276.853 0.5 264.979V47.0208C0.500168 35.1468 10.1261 25.5209 22 25.5208H52.166V38.5208ZM199.979 38.5208H80.9072V25.5208H199.979V38.5208Z"
+          fill="var(--main_color)" />
+        <rect x="52.1656" width="28.7416" height="49.9071" rx="14.3708" fill="var(--main_color)" />
+        <rect x="60.3776" y="5.54529" width="12.3179" height="38.8166" rx="6.15893" fill="var(--contrast_back)" />
+        <rect x="199.98" width="28.7416" height="49.9071" rx="14.3708" fill="var(--main_color)" />
+        <rect x="208.192" y="5.54529" width="12.3179" height="38.8166" rx="6.15893" fill="var(--contrast_back)" />
+      </svg>
+      <span id="day">22</span>
+      <span id="month">MAIO</span>
+    </div>
+    <div id="date_info">
+      <span id="time">21:05:23</span>
+      <div id="date_data">
+        <span id="full-date">21 de março de 2025</span>
+        <span id="weekday">Quinta-feira</span>
+      </div>
+    </div>
   </div>
 
   <dialog id="notifications">
@@ -391,12 +485,48 @@
     document.querySelectorAll('.menu-item').forEach(item => {
       item.addEventListener('click', function () {
         toggleMenu();
+        document.getElementById('home').style.display = 'none';
       });
     });
 
     window.addEventListener('click', () => {
       document.querySelectorAll('.actions ul').forEach(ul => ul.style.display = 'none');
     });
+
+    //-------------------------------
+    //-------------------------------
+    //-------------------------------
+
+    function atualizarDataHora() {
+      const agora = new Date();
+
+      const hora = agora.toLocaleTimeString('pt-BR', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+      });
+
+      const dia = agora.getDate();
+      const mes = agora.toLocaleString('pt-BR', { month: 'long' });
+      const ano = agora.getFullYear();
+      const diaSemana = agora.toLocaleString('pt-BR', { weekday: 'long' });
+
+      document.getElementById('time').textContent = hora;
+      document.getElementById('full-date').textContent = `${dia} de ${mes} de ${ano}`;
+      document.getElementById('weekday').textContent = diaSemana.charAt(0).toUpperCase() + diaSemana.slice(1);
+
+      const diaAtual = dia;
+      const mesAtual = mes;
+
+      document.getElementById('day').textContent = diaAtual;
+      document.getElementById('month').textContent = mesAtual.toUpperCase();
+      
+    }
+
+    atualizarDataHora();
+    setInterval(atualizarDataHora, 1000);
+
   </script>
 </body>
 
